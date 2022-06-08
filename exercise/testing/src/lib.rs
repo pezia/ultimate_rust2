@@ -1,8 +1,15 @@
+/// # Example
+/// ```
+/// # use  testing::sploosh;
+///
+/// assert_eq!(99, sploosh(-1, 0, 0))
+/// ```
 pub fn sploosh(x: i32, y: i32, z: i32) -> i32 {
     match (x, y, z) {
         (x, _, _) if x < 0 => 99,
         (1, 2, 3) => 4,
         (5, 6, 7) => 3,
+        (8, 9, 10) => 7,
         (x, y, z) => x + y - z,
     }
 }
@@ -13,9 +20,11 @@ pub fn splish(a: i32, b: i32) -> i32 {
 
 // 1. Use the `cfg` attribute to mark the `test` module below as a test module
 
+#[cfg(test)]
 mod test {
     // 2. Bring all the library items into scope with a `use` statement
     // Hint: It's okay to use `*` here.
+    use super::*;
 
     // 3. Write a test function that verifies the following condition using the `assert_eq!` or
     // `assert_ne!` macros
@@ -25,11 +34,23 @@ mod test {
     //
     // `cargo test` should run your tests and pass
     // Hint: Don't forget the `#[test]` attribute for your test function!
+    #[test]
+    fn sploosh_lazy_bad_test() {
+        assert_eq!(4, sploosh(1,2, 3));
+        assert_ne!(4, sploosh(5, 6, 7));
+        assert_eq!(99, sploosh(-5, 6, 7));
+    }
 
     // 4. Write a test function that verifies the following conditions using the `assert!` macro
     // - splish(100, 10) is negative
     // - splish(40, 20) is positive
     // - splish(9, 3) is 0
+    #[test]
+    fn splish_lazy_bad_test() {
+        assert!(splish(100, 10) < 0);
+        assert!(splish(40, 20) > 0);
+        assert_eq!(0, splish(9, 3));
+    }
 }
 
 // 5. Create a `tests/` directory and an integration test file `tests/more_tests.rs`
