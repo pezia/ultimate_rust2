@@ -1,6 +1,3 @@
-// Yes, yes, we know. It's an exercise, compiler, we want it that way!
-#[allow(unused_mut)]
-
 fn main() {
     // 1. Uncomment the code below. Create a closure that returns the square of an integer (the
     // number multiplied by itself), and assign the closure to the "square" variable. Then run the
@@ -18,7 +15,6 @@ fn main() {
     for (x, y) in pairs {
         println!("{:?}", (x + 1, y))
     }
-
 
     // 3. Uncomment the code below. There is a mutable vector named `numbers`. Use an iterator over
     // mutable references to multiply each of the values in `numbers` by 3.
