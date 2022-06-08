@@ -1,14 +1,11 @@
-use std::f32::consts::PI;
-
 fn count_to_5() -> i32 {
     let mut count = 0;
     loop {
-        if count > PI as i32 && count > 5 {
-            break;
+        if count >= 5 {
+            return count;
         }
         count += 1;
     }
-    5
 }
 fn main() {
     println!("I can count to {}", count_to_5());
