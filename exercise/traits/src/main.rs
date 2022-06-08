@@ -1,8 +1,14 @@
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum Cake {
     Chocolate,
     MapleBacon,
     Spice,
+}
+
+impl From<&Party> for Cake {
+    fn from(party: &Party) -> Self {
+        party.cake.clone()
+    }
 }
 
 #[derive(Debug)]
@@ -28,18 +34,12 @@ impl PartialEq for Party {
     }
 }
 
-impl From<&Party> for Cake {
-    fn from(party: &Party) -> Self {
-        party.cake.clone()
-    }
-}
-
 fn main() {
     // 1. The code below doesn't work because Cake doesn't implement Debug.
     // - Derive the Debug trait for the Cake enum above so this code will work. Then, run the code.
 
     let cake = Cake::Spice;
-    admire_cake(cake.clone());
+    admire_cake(cake);
 
     // 2. Uncomment the code below. It doesn't work since `cake` was *moved* into the admire_cake()
     // function. Let's fix the Cake enum so the code below works without any changes.
@@ -124,4 +124,10 @@ pub fn admire_cake(cake: Cake) {
 
 pub fn smell_cake<T: Into<Cake>>(something: T) {
     println!("Hmm...something smells like a {:?} cake!", something.into());
+}
+
+#[test]
+pub fn test_smell() {
+    let party = &Party::default();
+    assert_eq!(party.cake, Cake::Chocolate)
 }
