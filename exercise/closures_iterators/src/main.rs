@@ -15,10 +15,10 @@ fn main() {
     // (0, 1), it should return (1, 1). Run the code and make sure it works.
 
     let pairs = vec![(0, 1), (2, 3), (4, 5)];
-    pairs
-        .into_iter()
-        .map(|(x, y)| (x + 1, y))
-        .for_each(|t| println!("{:?}", t));
+    for (x, y) in pairs {
+        println!("{:?}", (x + 1, y))
+    }
+
 
     // 3. Uncomment the code below. There is a mutable vector named `numbers`. Use an iterator over
     // mutable references to multiply each of the values in `numbers` by 3.
@@ -26,9 +26,10 @@ fn main() {
     // Hint 2: `x` will be a mutable reference, so remember to dereference it to use it
 
     let mut numbers = vec![1, 2, 3, 4];
-    for x in &mut numbers {
-        *x *= 3;
-    }
+    numbers
+        .iter_mut()
+        .for_each(|x| *x *= 3);
+
     println!("{:?}", numbers); // should print [3, 6, 9, 12]
 
     // 4. Uncomment the code below.  Take the vector of words and
